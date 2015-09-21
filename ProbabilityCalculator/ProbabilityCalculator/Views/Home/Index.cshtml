@@ -1,0 +1,62 @@
+﻿@model ProbabilityCalculator.Models.Calculator
+
+@{
+    ViewBag.Title = "Probability Calculator";
+}
+
+<div class="container">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCalculation" }))
+    {
+        <fieldset>
+            <div class="probabilityLabel col-md-12">
+                @Html.Label("Probability A", new { @class = "col-md-12" })
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.ProbabilityOne)
+            </div>
+            <div class="col-md-12">
+                @Html.ValidationMessageFor(m => m.ProbabilityOne)
+            </div>
+            <div id="probabilityOneError" class="validationError col-md-12">
+            </div>
+
+            <br />
+
+            <div class="probabilityLabel col-md-12">
+                @Html.Label("Probability B", new { @class = "col-md-12" })
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.ProbabilityTwo)
+            </div>
+            <div class="col-md-12">
+                @Html.ValidationMessageFor(m => m.ProbabilityTwo)
+            </div>
+            <div id="probabilityTwoError" class="col-md-12 validationError">
+            </div>
+            <br />
+
+            <div class="probabilityFunctionLabel col-md-12">
+                @Html.Label("Probability Function", new { @class = "col-md-12" })
+            </div>
+
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.SelectedFunction,
+                    new List<SelectListItem> {
+                        new SelectListItem { Value = "0", Text = "Combined With: P(A)P(B)" },
+                        new SelectListItem { Value = "1", Text = "Either: P(A)+P(B) - P(A)P(B)" }
+                    })
+            </div>
+            <br />
+            
+            <div id="resultLabel" class="resultLabel col-md-12">
+            </div>
+
+            <div class="col-md-4">
+                <button type="button" name="btnCalculate" onclick="Calculate()" class="btn btn-lg btn-primary">
+                    Calculate
+                </button>
+            </div>
+
+        </fieldset>
+    }
+</div>
