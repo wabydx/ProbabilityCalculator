@@ -1,40 +1,14 @@
-﻿function Calculate() {
-    if (ValidateValues()) {
+﻿function Calculate() {    
+    if ($('#frmCalculation').valid()) {
         var probabilityOne = parseFloat($('#ProbabilityOne').val());
         var probabilityTwo = parseFloat($('#ProbabilityTwo').val());
-        var selectedOption = $('#SelectedFunction').val();
+        var selectedOption = $('#SelectedOption').val();
 
         var result = GetResult(probabilityOne, probabilityTwo, selectedOption);
-        $('#resultLabel').html("Probability result is: " + result);
+        $('#resultLabel').html("Probability is: " + result);
 
         //SaveResult(probabilityOne, probabilityOne, selectedOption, result);
     }
-}
-
-function ValidateValues() {
-    var value1 = false;
-    var value2 = false;
-    var errorMessage = 'Value must be between 0.0 and 1.0';
-    var probabilityOne = parseFloat($('#ProbabilityOne').val());
-    var probabilityTwo = parseFloat($('#ProbabilityTwo').val());
-
-    if (isNaN(probabilityOne) || (probabilityOne < 0.0 || probabilityOne > 1.0)) {
-        $('#probabilityOneError').html(errorMessage);
-        $('#resultLabel').html('');
-    } else {
-        $('#probabilityOneError').html('');
-        value1 = true;
-    }
-
-    if (isNaN(probabilityTwo) || (probabilityTwo < 0.0 || probabilityTwo > 1.0)) {
-        $('#probabilityTwoError').html(errorMessage);
-        $('#resultLabel').html('');
-    } else {
-        $('#probabilityTwoError').html('');
-        value2 = true;
-    }
-
-    return value1 && value2;
 }
 
 function GetResult(probabilityOne, probabilityTwo, selectedOption) {

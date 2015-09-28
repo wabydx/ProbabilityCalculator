@@ -1,62 +1,61 @@
-﻿@model ProbabilityCalculator.Models.Calculator
+﻿@model ProbabilityCalculator.Models.IndexViewModel
 
 @{
     ViewBag.Title = "Probability Calculator";
 }
 
 <div class="container">
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCalculation" }))
+    <div class="jumbotron">
+        <h2>Probability calculator</h2>
+        <p>Enter two probability values and select a function to perform</p>
+    </div>
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCalculation", name = "frmCalculation" }))
     {
-        <fieldset>
-            <div class="probabilityLabel col-md-12">
-                @Html.Label("Probability A", new { @class = "col-md-12" })
+        <form class="form-horizontal">
+            <div class="form-group formRow">
+                @Html.LabelFor(m => m.ProbabilityOne, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.ProbabilityOne, new { @class = "form-control", @placeholder = "First value", @data_val_number = "Value entered must be a valid number", @maxlength="20", autocomplete = "off" })
+                </div>     
+                <div class="col-sm-offset-3 col-sm-9">
+                    &nbsp;@Html.ValidationMessageFor(m => m.ProbabilityOne)
+                </div>                   
             </div>
-            <div class="col-md-12">
-                @Html.TextBoxFor(model => model.ProbabilityOne)
+            <div class="form-group formRow">
+                @Html.LabelFor(m => m.ProbabilityTwo, new { @class = "col-sm-3 control-label formRow" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.ProbabilityTwo, new { @class = "form-control formRow", @placeholder = "Second value", @data_val_number = "Value entered must be a valid number", @maxlength="20", autocomplete = "off" })
+                </div>
+                <div class="col-sm-offset-3 col-sm-9">
+                    &nbsp;@Html.ValidationMessageFor(m => m.ProbabilityTwo)
+                </div>
+                <div id="probabilityTwoError" class="col-sm-offset-3 col-sm-9">
+                </div>
             </div>
-            <div class="col-md-12">
-                @Html.ValidationMessageFor(m => m.ProbabilityOne)
-            </div>
-            <div id="probabilityOneError" class="validationError col-md-12">
-            </div>
-
-            <br />
-
-            <div class="probabilityLabel col-md-12">
-                @Html.Label("Probability B", new { @class = "col-md-12" })
-            </div>
-            <div class="col-md-12">
-                @Html.TextBoxFor(model => model.ProbabilityTwo)
-            </div>
-            <div class="col-md-12">
-                @Html.ValidationMessageFor(m => m.ProbabilityTwo)
-            </div>
-            <div id="probabilityTwoError" class="col-md-12 validationError">
-            </div>
-            <br />
-
-            <div class="probabilityFunctionLabel col-md-12">
-                @Html.Label("Probability Function", new { @class = "col-md-12" })
-            </div>
-
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.SelectedFunction,
-                    new List<SelectListItem> {
-                        new SelectListItem { Value = "0", Text = "Combined With: P(A)P(B)" },
-                        new SelectListItem { Value = "1", Text = "Either: P(A)+P(B) - P(A)P(B)" }
-                    })
-            </div>
-            <br />
+            <div class="form-group formRow">
+                @Html.LabelFor(m => m.SelectedOption, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9 formRow">
+                    @Html.DropDownListFor(m => m.SelectedOption,
+                        new List<SelectListItem> {
+                            new SelectListItem { Value = "0", Text = "Combined With: P(A)P(B)" },
+                            new SelectListItem { Value = "1", Text = "Either: P(A)+P(B) - P(A)P(B)" },
+                        },
+                        new { @class = "form-control" })
+                </div>
+            </div>            
             
-            <div id="resultLabel" class="resultLabel col-md-12">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <button type="button" name="Submit" onclick="Calculate()" class="btn btn-primary btnCalculate">
+                        Calculate
+                    </button>
+                </div>
+                <div id="resultLabel" class="resultLabel col-sm-6">
+                </div>
             </div>
-
-            <div class="col-md-4">
-                <button type="button" name="btnCalculate" onclick="Calculate()" class="btn btn-lg btn-primary">
-                    Calculate
-                </button>
-            </div>
-
-        </fieldset>
+                      
+        </form>  
     }
 </div>

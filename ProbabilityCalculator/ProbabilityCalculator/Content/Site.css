@@ -45,14 +45,27 @@ input[type="checkbox"].input-validation-error {
     color: red;
 }
 
-.probabilityLabel, .probabilityFunctionLabel, .validationError .resultLabel {
+.probabilityLabel, .probabilityFunctionLabel {
+    padding: 25px 0 0 10px;
+}
+
+.probabilityControl, .probabilityDropdown, .resultLabel {
     padding: 20px 0 0 10px;
 }
 
 .resultLabel {
-    color: #468847;
+    color: #4682b4;
     font-weight: bold;
     font-size: 20px;
-    padding-bottom: 25px;
+    padding: 40px 0 0 15px;
 }
+
+.formRow {
+    margin: 10px 0 0 0;
+}
+
+.btnCalculate {
+    margin: 40px 0 0 0;
+}
+
 
